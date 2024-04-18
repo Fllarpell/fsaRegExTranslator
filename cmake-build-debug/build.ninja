@@ -49,11 +49,11 @@ cmake_ninja_workdir = C$:/Users/dimas/CLionProjects/fsaRegExTranslator/cmake-bui
 
 build cmake_object_order_depends_target_fsaRegExTranslator: phony || CMakeFiles/fsaRegExTranslator.dir
 
-build CMakeFiles/fsaRegExTranslator.dir/main.cpp.obj: CXX_COMPILER__fsaRegExTranslator_unscanned_Debug C$:/Users/dimas/CLionProjects/fsaRegExTranslator/main.cpp || cmake_object_order_depends_target_fsaRegExTranslator
-  DEP_FILE = CMakeFiles\fsaRegExTranslator.dir\main.cpp.obj.d
+build CMakeFiles/fsaRegExTranslator.dir/main/main.cpp.obj: CXX_COMPILER__fsaRegExTranslator_unscanned_Debug C$:/Users/dimas/CLionProjects/fsaRegExTranslator/main/main.cpp || cmake_object_order_depends_target_fsaRegExTranslator
+  DEP_FILE = CMakeFiles\fsaRegExTranslator.dir\main\main.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\fsaRegExTranslator.dir
-  OBJECT_FILE_DIR = CMakeFiles\fsaRegExTranslator.dir
+  OBJECT_FILE_DIR = CMakeFiles\fsaRegExTranslator.dir\main
 
 build CMakeFiles/fsaRegExTranslator.dir/errors/ErrorHandling.cpp.obj: CXX_COMPILER__fsaRegExTranslator_unscanned_Debug C$:/Users/dimas/CLionProjects/fsaRegExTranslator/errors/ErrorHandling.cpp || cmake_object_order_depends_target_fsaRegExTranslator
   DEP_FILE = CMakeFiles\fsaRegExTranslator.dir\errors\ErrorHandling.cpp.obj.d
@@ -87,7 +87,7 @@ build CMakeFiles/fsaRegExTranslator.dir/incoming_data/InputData.cpp.obj: CXX_COM
 #############################################
 # Link the executable fsaRegExTranslator.exe
 
-build fsaRegExTranslator.exe: CXX_EXECUTABLE_LINKER__fsaRegExTranslator_Debug CMakeFiles/fsaRegExTranslator.dir/main.cpp.obj CMakeFiles/fsaRegExTranslator.dir/errors/ErrorHandling.cpp.obj CMakeFiles/fsaRegExTranslator.dir/kleene's_algorithm/KleeneAlgorithm.cpp.obj CMakeFiles/fsaRegExTranslator.dir/fsa/FSA.cpp.obj CMakeFiles/fsaRegExTranslator.dir/incoming_data/InputData.cpp.obj
+build fsaRegExTranslator.exe: CXX_EXECUTABLE_LINKER__fsaRegExTranslator_Debug CMakeFiles/fsaRegExTranslator.dir/main/main.cpp.obj CMakeFiles/fsaRegExTranslator.dir/errors/ErrorHandling.cpp.obj CMakeFiles/fsaRegExTranslator.dir/kleene's_algorithm/KleeneAlgorithm.cpp.obj CMakeFiles/fsaRegExTranslator.dir/fsa/FSA.cpp.obj CMakeFiles/fsaRegExTranslator.dir/incoming_data/InputData.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\fsaRegExTranslator.dir
