@@ -15,13 +15,13 @@ void ErrorHandling::acceptingStateError() {
     exit(0);
 }
 
-void ErrorHandling::existingStateError() {
-    std::cout << "E4: A state 's' is not in the set of states"; // add parameteres
+void ErrorHandling::existingStateError(const std::string &state) {
+    std::cout << "E4: A state " << state <<" is not in the set of states"; // add parameteres
     exit(0);
 }
 
-void ErrorHandling::existingTransitionError() {
-    std::cout << "E5: A transition 'a' is not represented in the alphabet"; // add parameteres
+void ErrorHandling::existingTransitionError(const std::string &transition) {
+    std::cout << "E5: A transition " << transition << " is not represented in the alphabet"; // add parameteres
     exit(0);
 }
 

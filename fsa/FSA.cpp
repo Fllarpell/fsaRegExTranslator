@@ -5,46 +5,54 @@ void FSA::addSymbolIntoAlphabet(const std::string &symbol) {
 }
 
 void FSA::addState(const std::string &label) {
-    FSA::State state(label);
+    FSA::State *state = new FSA::State(label);
     this->states.push_back(state);
 }
 
 void FSA::addInitialState(const std::string &label) {
-    for (State state : this->states)
-        if (state.getLabel() == label) {
+    for (State *state: this->states)
+        if (state->getLabel() == label) {
             this->initialStates.push_back(state);
             return;
         }
 }
 
 void FSA::addAcceptingState(const std::string &label) {
-    for (State state : this->states)
-        if (state.getLabel() == label) {
+    for (State *state : this->states)
+        if (state->getLabel() == label) {
             this->acceptingStates.push_back(state);
             return;
         }
 }
 
-std::vector<FSA::State> FSA::getStates() {
+std::vector<FSA::State*> FSA::getStates() {
     return this->states;
 }
 
-std::vector<FSA::State> FSA::getInitialStates() {
-    return this->initialStates;
+std::string FSA::getTypeFSA() {
+    return this->typeFSA;
 }
 
-std::vector<FSA::State> FSA::getAcceptingStates() {
+std::vector<FSA::State*> FSA::getAcceptingStates() {
     return this->acceptingStates;
 }
 
-std::vector<std::string> FSA::getAlphabet() {
+std::vector<FSA::State *> FSA::getInitialStates() {
+    return this->initialStates;
+}
+
+std::vector<std::string> FSA::getAphabet() {
     return this->alphabet;
 }
 
-void FSA::State::addTransition(const std::string &labelForTransition, const FSA::State& transitionState) {
-    this->transitions.insert({labelForTransition, transitionState});
+void FSA::State::addTransition(const std::string &labelForTransition, FSA::State *transitionState) {
+    this->transitions.insert({ labelForTransition, transitionState});
 }
 
 std::string FSA::State::getLabel() {
     return this->label;
+}
+
+std::map<std::string, FSA::State*> FSA::State::getTransitions() {
+    return this->transitions;
 }
