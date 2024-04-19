@@ -78,10 +78,4 @@ void InputData::inputData() {
                                     initialStatesLabel,
                                     acceptingStatesLabel,
                                     transitions);
-
-
 }
-
-
-
-

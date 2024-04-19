@@ -9,6 +9,7 @@ KleeneAlgorithm::KleeneAlgorithm(const std::string &typeFSA,
     fsa = new FSA(typeFSA);
     initialRegEx.resize(states.size(), std::vector<std::string>(states.size()));
     finalRegex.resize(states.size(), std::vector<std::string>(states.size()));
+    finalStatesInRegex.resize(states.size(), std::vector<bool>(states.size()));
 
     for (std::string &string : states) {
         fsa->addState(string);
@@ -60,27 +61,40 @@ void KleeneAlgorithm::fillInitialRegEx() {
     for (FSA::State *stateFrom : fsa->getStates()) {
         int j = 0;
         for (FSA::State *stateTo : fsa->getStates()) {
+
+            for (FSA::State *state : fsa->getAcceptingStates())
+                if (stateTo->getLabel() == state->getLabel())
+                    finalStatesInRegex[i][j] = true;
+                else
+                    finalStatesInRegex[i][j] = false;
+
+
             std::string regex;
             if (stateFrom->getLabel() == stateTo->getLabel()) {
                 for (auto & it : stateFrom->getTransitions())
                     if (it.second == stateTo)
-                        regex = "(" + it.first + "|eps)";
+                        if (regex.empty())
+                            regex = "(" + it.first + "|";
+                        else
+                            regex += it.first + "|";
                 if (regex.empty())
                     regex = "(eps)";
+                else
+                    regex += "eps)";
             } else {
                 for (auto & it : stateFrom->getTransitions()) {
                     if (stateFrom->getTransitions().find(it.first)->second->getLabel() == stateTo->getLabel()) {
                         if (regex.empty())
-                            regex += it.first;
+                            regex += "(" + it.first + ")";
                         else
-                            regex += "|" + it.first;
+                            regex += "|(" + it.first + ")";
                     }
                 }
 
                 if (regex.empty())
                     regex += "({})";
 
-                this->initialRegEx[i][j] = regex;
+
             }
             this->initialRegEx[i][j] = regex;
             j++;
@@ -94,14 +108,28 @@ void KleeneAlgorithm::fillInitialRegEx() {
             if (this->fsa->getTypeFSA() == "deterministic")
                 ErrorHandling::fsaTypeError();
 
-    stepOneToRegEx();
+    finalRegEx();
 }
 
-void KleeneAlgorithm::stepOneToRegEx() {
+void KleeneAlgorithm::finalRegEx() {
+    for (int k = 0; k < this->initialRegEx.size(); k++) {
+        for (int i = 0; i < this->initialRegEx.size(); i++)
+            for (int j = 0; j < this->initialRegEx.size(); j++) {
+                finalRegex[i][j] = this->initialRegEx[i][k] + this->initialRegEx[k][k]
+                                   + "*" + this->initialRegEx[k][j] + "|" + this->initialRegEx[i][j];
 
-    for (int i = 0; i < this->initialRegEx.size(); i++) {
-        for (int j = 0; j < this->initialRegEx.size(); j++) {
-            finalRegex[i][j] = this->initialRegEx[i][0] + this->initialRegEx[0][0] + "*" + this->initialRegEx[0][j] + "|" + this->initialRegEx[i][j];
+            }
+        for (int i = 0; i < this->initialRegEx.size(); i++)
+            for (int j = 0; j < this->initialRegEx.size(); j++) {
+                initialRegEx[i][j] = finalRegex[i][j];
+            }
+    }
+
+    for (int i = 0; i < this->finalStatesInRegex.size(); ++i) {
+        for (int j = 0; j < this->finalStatesInRegex.size(); ++j) {
+            if (finalStatesInRegex[i][j])
+                std::cout << this->finalRegex[i][j] << std::endl;
         }
     }
+
 }

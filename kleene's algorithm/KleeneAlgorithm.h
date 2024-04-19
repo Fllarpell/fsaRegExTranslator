@@ -18,11 +18,12 @@ public:
 
     void fillInitialRegEx();
 
-    void stepOneToRegEx();
+    void finalRegEx();
 
 private:
     std::vector<std::vector<std::string>> initialRegEx;
     std::vector<std::vector<std::string>> finalRegex;
+    std::vector<std::vector<bool>> finalStatesInRegex;
 };
 
 
