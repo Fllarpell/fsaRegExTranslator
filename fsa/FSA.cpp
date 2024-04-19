@@ -41,6 +41,10 @@ std::vector<FSA::State *> FSA::getInitialStates() {
     return this->initialStates;
 }
 
+std::vector<std::string> FSA::getAphabet() {
+    return this->alphabet;
+}
+
 void FSA::State::addTransition(const std::string &labelForTransition, FSA::State *transitionState) {
     this->transitions.insert({ labelForTransition, transitionState});
 }

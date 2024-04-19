@@ -42,6 +42,8 @@ public:
 
     std::vector<FSA::State*> getAcceptingStates();
 
+    std::vector<std::string> getAphabet();
+
 private:
     std::string typeFSA;
 
