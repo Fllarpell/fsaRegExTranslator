@@ -15,7 +15,6 @@ void FSA::addInitialState(const std::string &label) {
             this->initialStates.push_back(state);
             return;
         }
-    ErrorHandling::existingStateError();
 }
 
 void FSA::addAcceptingState(const std::string &label) {
@@ -24,7 +23,6 @@ void FSA::addAcceptingState(const std::string &label) {
             this->acceptingStates.push_back(state);
             return;
         }
-    ErrorHandling::existingStateError();
 }
 
 std::vector<FSA::State> FSA::getStates() {
@@ -45,4 +43,8 @@ std::vector<std::string> FSA::getAlphabet() {
 
 void FSA::State::addTransition(const std::string &labelForTransition, const FSA::State& transitionState) {
     this->transitions.insert({labelForTransition, transitionState});
+}
+
+std::string FSA::State::getLabel() {
+    return this->label;
 }

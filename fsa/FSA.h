@@ -1,11 +1,7 @@
-#include <utility>
-
 #include "../main/include.h"
-#include "../errors/ErrorHandling.h"
 
 #ifndef FSAREGEXTRANSLATOR_FSA_H
 #define FSAREGEXTRANSLATOR_FSA_H
-
 
 class FSA {
 public:
@@ -20,9 +16,7 @@ public:
 
         void addTransition(const std::string &labelForTransition, const State& transitionState);
 
-        std::string getLabel() {
-            return this->label;
-        }
+        std::string getLabel();
 
     private:
         std::string label;
