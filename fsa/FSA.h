@@ -14,13 +14,15 @@ public:
         explicit State(std::string  label) : label(std::move(label)) {};
         ~State() = default;
 
-        void addTransition(const std::string &labelForTransition, const State& transitionState);
+        void addTransition(const std::string &labelForTransition, State *transitionState);
 
         std::string getLabel();
 
+        std::map<std::string, FSA::State*> getTransitions();
+
     private:
         std::string label;
-        std::map<std::string, State> transitions;
+        std::map<std::string, FSA::State*> transitions;
 
     };
 
@@ -32,20 +34,22 @@ public:
 
     void addAcceptingState(const std::string &label);
 
-    std::vector<State> getStates();
+    std::vector<State*> getStates();
 
-    std::vector<State> getInitialStates();
+    std::vector<State*> getInitialStates();
 
-    std::vector<State> getAcceptingStates();
+    std::vector<State*> getAcceptingStates();
 
     std::vector<std::string> getAlphabet();
+
+
 
 private:
     std::string typeFSA;
 
-    std::vector<State> initialStates;
-    std::vector<State> acceptingStates;
-    std::vector<State> states;
+    std::vector<FSA::State*> initialStates;
+    std::vector<FSA::State*> acceptingStates;
+    std::vector<FSA::State*> states;
     std::vector<std::string> alphabet;
 };
 

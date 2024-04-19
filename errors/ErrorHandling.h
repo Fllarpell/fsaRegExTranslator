@@ -9,8 +9,8 @@ public:
     static void inputFileError();
     static void initialStateError();
     static void acceptingStateError();
-    static void existingStateError();
-    static void existingTransitionError();
+    static void existingStateError(const std::string &state);
+    static void existingTransitionError(const std::string &transition);
     static void disjointStatesError();
     static void fsaTypeError();
 };

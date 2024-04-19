@@ -45,34 +45,39 @@ void InputData::inputData() {
                 break;
 
             case 1:
-                statesLabel = split(data, ',');
+                statesLabel = Split::split(data, ',');
                 break;
 
             case 2:
-                alphabetSymbols = split(data, ',');
+                alphabetSymbols = Split::split(data, ',');
                 break;
 
             case 3:
                 if (data.empty())
                     ErrorHandling::initialStateError();
-                initialStatesLabel = split(data, ',');
+                initialStatesLabel = Split::split(data, ',');
                 break;
 
             case 4:
                 if (data.empty())
                     ErrorHandling::acceptingStateError();
-                acceptingStatesLabel = split(data, ',');
+                acceptingStatesLabel = Split::split(data, ',');
                 break;
 
             case 5:
-                transitions = split(data, ',');
+                transitions = Split::split(data, ',');
                 break;
         }
     }
 
     input.close();
 
-    // calling kleene algorithm that links with FSA
+    KleeneAlgorithm kleeneAlgorithm(typeFSA,
+                                    statesLabel,
+                                    alphabetSymbols,
+                                    initialStatesLabel,
+                                    acceptingStatesLabel,
+                                    transitions);
 }
 
 
