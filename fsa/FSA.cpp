@@ -29,16 +29,8 @@ std::vector<FSA::State*> FSA::getStates() {
     return this->states;
 }
 
-std::vector<FSA::State*> FSA::getInitialStates() {
-    return this->initialStates;
-}
-
-std::vector<FSA::State*> FSA::getAcceptingStates() {
-    return this->acceptingStates;
-}
-
-std::vector<std::string> FSA::getAlphabet() {
-    return this->alphabet;
+std::string FSA::getTypeFSA() {
+    return this->typeFSA;
 }
 
 void FSA::State::addTransition(const std::string &labelForTransition, FSA::State *transitionState) {

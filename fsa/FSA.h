@@ -36,13 +36,7 @@ public:
 
     std::vector<State*> getStates();
 
-    std::vector<State*> getInitialStates();
-
-    std::vector<State*> getAcceptingStates();
-
-    std::vector<std::string> getAlphabet();
-
-
+    std::string getTypeFSA();
 
 private:
     std::string typeFSA;
