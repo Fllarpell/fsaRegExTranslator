@@ -62,11 +62,12 @@ void KleeneAlgorithm::fillInitialRegEx() {
         int j = 0;
         for (FSA::State *stateTo : fsa->getStates()) {
 
-            for (FSA::State *state : fsa->getAcceptingStates())
-                if (stateTo->getLabel() == state->getLabel())
-                    finalStatesInRegex[i][j] = true;
-                else
-                    finalStatesInRegex[i][j] = false;
+            for (FSA::State *stateInit : fsa->getInitialStates())
+                for (FSA::State *stateAccept : fsa->getAcceptingStates())
+                    if (stateTo->getLabel() == stateAccept->getLabel() && stateFrom->getLabel() == stateInit->getLabel())
+                        finalStatesInRegex[i][j] = true;
+                    else
+                        finalStatesInRegex[i][j] = false;
 
 
             std::string regex;
@@ -115,8 +116,8 @@ void KleeneAlgorithm::finalRegEx() {
     for (int k = 0; k < this->initialRegEx.size(); k++) {
         for (int i = 0; i < this->initialRegEx.size(); i++)
             for (int j = 0; j < this->initialRegEx.size(); j++) {
-                finalRegex[i][j] = this->initialRegEx[i][k] + this->initialRegEx[k][k]
-                                   + "*" + this->initialRegEx[k][j] + "|" + this->initialRegEx[i][j];
+                finalRegex[i][j] = "(" + this->initialRegEx[i][k] + this->initialRegEx[k][k]
+                                   + "*" + this->initialRegEx[k][j] + "|" + this->initialRegEx[i][j] + ")";
 
             }
         for (int i = 0; i < this->initialRegEx.size(); i++)
@@ -125,11 +126,17 @@ void KleeneAlgorithm::finalRegEx() {
             }
     }
 
+    // output regular expression
+    std::string regex;
     for (int i = 0; i < this->finalStatesInRegex.size(); ++i) {
         for (int j = 0; j < this->finalStatesInRegex.size(); ++j) {
             if (finalStatesInRegex[i][j])
-                std::cout << this->finalRegex[i][j] << std::endl;
+                if (regex.empty())
+                    regex = this->finalRegex[i][j];
+                else
+                    regex += "+" + this->finalRegex[i][j];
         }
     }
+    std::cout << regex;
 
 }

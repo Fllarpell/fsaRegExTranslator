@@ -38,6 +38,8 @@ public:
 
     std::string getTypeFSA();
 
+    std::vector<FSA::State*> getInitialStates();
+
     std::vector<FSA::State*> getAcceptingStates();
 
 private:
